@@ -1,0 +1,14 @@
+body {
+  margin: 1rem;
+}
+
+#wrapper {
+  display:  grid;
+  grid-template-areas:
+    "landing-images"
+    "landing-bar"
+    "about-company"
+    "bio"
+    "insightful-quote"
+    "content-title"
+}
