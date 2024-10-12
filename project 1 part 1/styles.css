@@ -102,13 +102,15 @@ footer {
   grid-area: footer;
   align-items: flex-start;
   background-color: #ffaf00;
+  flex-wrap: wrap;
 }
 
 footer > img {
-  flex: 0 2;
-  max-width: 40%;
-  max-height: 40%;
+  max-width: 100%;
+  max-height: 100%;
   margin-right: 1em;
+  height: auto;
+  flex: 1 1 auto;
 }
 
 #phone-number-head {
@@ -123,11 +125,25 @@ footer > img {
   margin-top: 0;
 }
 
-#phone-number > img {
+#phone {
   display: flex;
   flex-direction: row;
-  max-width: 20%;
-  max-height: 20%;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+#phone > img {
+}
+
+#phone-numbers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#phone-numbers p {
+  margin: 0;
 }
 
 
