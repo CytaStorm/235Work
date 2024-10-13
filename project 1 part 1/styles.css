@@ -23,7 +23,13 @@ body {
 }
 
 .landing-images {
-  margin-top: 1.5em;
+  margin-top: 3em;
+}
+
+.title-text{
+  margin-top: 0.2em;
+  text-transform: uppercase;
+  display: block;
 }
 
 .fa-solid {
@@ -55,11 +61,10 @@ body {
   display: flex;
   min-width: 0;
   gap: 1em;
-  margin: 1em 0;
 }
 
 .catalog-item img {
-  max-width: 40vw;
+  max-width: 45vw;
 }
 
 .catalog-text {
@@ -75,10 +80,10 @@ body {
 }
 
 .catalog-text subtitle {
-  display: inline-block;
+  display: block;
   margin: 0.125em 0;
   overflow: hidden;
-  flex: 3;
+  flex: 6;
   flex-basis: 0;
 }
 
@@ -88,9 +93,8 @@ body {
   color: black;
   font-weight: 600;
   margin: 0 0;
-  flex: 1;
-  flex-basis: 0;
   text-align: center;
+  align-self: flex-start;
 }
 
 .alex-brush-regular {
@@ -105,15 +109,13 @@ body {
   grid-template-areas:
     "landing-images-empty-left landing-images-left landing-images-right landing-images-empty-right"
     "landing-bar-left-block landing-bar-left-block landing-images-right landing-bar-right-block"
-    "landing-bar-margin-left landing-bar landing-bar landing-bar-margin-right"
-    "landing-bar-margin-left footer footer landing-bar-margin-right"
+    "landing-bar landing-bar landing-bar landing-bar"
+    "footer footer footer footer"
     "thank-you thank-you thank-you thank-you"
-    "about-company about-company about-company about-company"
     "bio bio bio bio"
-    "insightful-quote insightful-quote insightful-quote insightful-quote"
     "content content content content";
   grid-template-columns: 10% 40% 40% 10%;
-  grid-template-rows: repeat(9, auto);
+  grid-template-rows: repeat(7, auto);
   height: 100%;
 }
 
@@ -148,26 +150,15 @@ body {
   grid-area: landing-bar-right-block;
 }
 
-#landing-text-margin-left {
-  grid-area: landing-bar-margin-left;
-}
-
-#landing-text-margin-right {
-  grid-area: landing-bar-margin-right;
-}
-
 #title {
   grid-area: landing-bar;
+  padding: 0 10%;
 }
 
 #id-number {
   margin-top: 3em;
 }
 
-#title-text1, #title-text2{
-  margin-top: 0.2em;
-  text-transform: uppercase;
-}
 
 #title-text1 {
   margin-bottom: 0.2em;
@@ -175,24 +166,33 @@ body {
 }
 
 #title-text2 {
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 1.5em;
 }
 
 footer { 
   grid-area: footer;
+  padding: 0 10%;
 }
 
 #contact-head {
   display: flex;
-  min-height: 0;
+  min-width: 0;
   gap: 1em;
   margin: 1em 0;
+}
+
+#contact-head img {
+  flex: 1 1 0;
+  max-width: 5rem;
+  max-height: 5rem;
 }
 
 #phone-head {
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  min-width: 0;
 }
 
 #contact {
@@ -209,7 +209,7 @@ footer {
 
 #other-info {
   display: flex;
-  justify-content: space-between;
+  gap: 30%;
   margin: 1em 0;
 }
 
@@ -226,15 +226,19 @@ footer {
   margin: 2em 0;
 }
 
-#about {
-  grid-area: about-company;
-}
-
 #bio {
   grid-area: bio;
+  margin-bottom: 5rem;
+}
+
+#bio h1 {
+  grid-area: about;
+}
+
+#bio-wrapper{
   display: flex;
-  justify-content: space-around;
   gap: 1em;
+  margin-bottom: 5rem;
 }
 
 #bio-image {
@@ -254,11 +258,6 @@ footer {
 
 #bio-text{
   margin-bottom: 1em;
-}
-
-#insight {
-  grid-area: insightful-quote;
-  margin-bottom: 5rem;
 }
 
 #insight-wrapper {
@@ -285,9 +284,75 @@ footer {
 
 #catalog-wrapper {
   display: flex;
+  gap: 1em;
   flex-direction: column;
 }
 
+@media screen and (min-width: 850px) {
+  .catalog-item img {
+    max-width: 40%;
+  }
+
+  .black-box {
+    padding: 0.2em 0.5em;
+    display: inline-flex;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    font-size: 2em;
+  }
+
+  .title-text{
+    font-size: 2em;
+  }
+
+  #wrapper {
+    display: grid;
+    grid-template-areas:
+      "thank-you landing-images-empty-left landing-images-left landing-images-right landing-images-empty-right"
+      "landing-bar-left-block landing-bar-left-block landing-bar-left-block landing-images-right landing-bar-right-block"
+      "footer landing-bar landing-bar landing-bar landing-bar"
+      "bio content content content content"
+      "bio content content content content";
+    grid-template-columns: 50% 5% 20% 20% 5%;
+    grid-template-rows: repeat(5, auto);
+    height: 100%;
+  }
+
+  #landing-images-left img, #landing-images-right img {
+    max-width: 20vw;
+    border: 1em solid white;
+  }
+
+  footer {
+    padding-bottom: 4em;
+  };
+
+  #contact-head {
+    margin-top: 6em;
+  }
+
+  #contact {
+    font-size: 1.5em;
+  }
+
+  #about{
+    justify-self: start;
+    margin-bottom: 0;
+  }
+
+  #bio {
+    margin-bottom: 1rem;
+  }
+
+  #bio-image {
+    max-width: 30vw;
+  }
+
+  #insight-wrapper img {
+    max-width: 10vw;
+  }
+}
 
 
 
