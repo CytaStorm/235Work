@@ -3,7 +3,7 @@ body {
 }
 
 * {
-  font-family: Montserrat;
+  font-family: "Montserrat";
 }
 
 .black-box {
@@ -12,6 +12,92 @@ body {
   background-color: black;
   color: white;
   font-weight: 600;
+}
+
+.background-color {
+  background-color: #ffaf00;
+}
+
+.contact-text {
+  margin: 0.2em;
+}
+
+.landing-images {
+  margin-top: 1.5em;
+}
+
+.fa-solid {
+  font-size: 2em;
+  align-self: center;
+}
+
+.contact-wrapper {
+  display: flex;
+  gap: 0.8em;
+  min-height: 0;
+}
+
+.section-title-text {
+  text-transform: uppercase;
+  font-size: 2em;
+}
+
+.non-grid-margin {
+  margin: 0 10%;
+}
+
+.line {
+  margin: 0.5em 0;
+  border: .1em solid black;
+}
+
+.catalog-item {
+  display: flex;
+  min-width: 0;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+.catalog-item img {
+  max-width: 40vw;
+}
+
+.catalog-text {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.catalog-text h2 {
+  margin: 0 0;
+  flex: 1;
+  flex-basis: 0;
+}
+
+.catalog-text subtitle {
+  display: inline-block;
+  margin: 0.125em 0;
+  overflow: hidden;
+  flex: 3;
+  flex-basis: 0;
+}
+
+.yellow-box {
+  padding: 0.2em 0.5em;
+  background-color: #ffaf00;
+  color: black;
+  font-weight: 600;
+  margin: 0 0;
+  flex: 1;
+  flex-basis: 0;
+  text-align: center;
+}
+
+.alex-brush-regular {
+  font-family: "Alex Brush", cursive;
+  font-weight: 1000;
+  font-style: normal;
+  font-size: 40px;
 }
 
 #wrapper {
@@ -28,6 +114,7 @@ body {
     "content content content content";
   grid-template-columns: 10% 40% 40% 10%;
   grid-template-rows: repeat(9, auto);
+  height: 100%;
 }
 
 /* Landing images */
@@ -55,27 +142,22 @@ body {
 
 #landing-bar-left-block {
   grid-area: landing-bar-left-block;
-  background-color: #ffaf00;
 }
 
 #landing-bar-right-block {
   grid-area: landing-bar-right-block;
-  background-color: #ffaf00;
 }
 
 #landing-text-margin-left {
   grid-area: landing-bar-margin-left;
-  background-color: #ffaf00;
 }
 
 #landing-text-margin-right {
   grid-area: landing-bar-margin-right;
-  background-color: #ffaf00;
 }
 
 #title {
   grid-area: landing-bar;
-  background-color: #ffaf00;
 }
 
 #id-number {
@@ -99,53 +181,49 @@ body {
 
 footer { 
   grid-area: footer;
-  background-color: #ffaf00;
 }
 
-#phone-number-head {
-  align-items: flex-start;
-  min-height: 0;
-  min-width: 0;
-
-  /*Its own flexbox*/
+#contact-head {
   display: flex;
+  min-height: 0;
+  gap: 1em;
+  margin: 1em 0;
 }
 
-#phone {
-  align-items: flex-start;
-  flex-wrap: wrap;
+#phone-head {
   display: flex;
   flex-direction: column;
 }
 
 #contact {
-  font-size: 0.8em;
   margin-top: 0;
-  flex: 0 1 0;
+  margin-bottom: 0;
+  font-size: 1em;
+  text-align: center;
 }
 
 #phone-numbers {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-#phone-numbers img {
-  min-width: 0;
-  min-height: 0;
-  max-width: 40%;
-  max-height: 40%;
+#other-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
 }
-
-
-#phone-numbers p {
-  margin: 0;
-  font-size: x-small;
-}
-
-
 
 #thank-you {
   grid-area: thank-you;
+  margin: 5rem 10%;
+}
+
+#thank-you h1 {
+  margin-bottom: 0;
+}
+
+#thank-you p {
+  margin: 2em 0;
 }
 
 #about {
@@ -154,14 +232,67 @@ footer {
 
 #bio {
   grid-area: bio;
+  display: flex;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+#bio-image {
+  height: auto;
+  max-width: 50vw;
+  align-self: flex-start;
+}
+
+#bio-text h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#bio-text p:last-of-type{
+  margin-top: 0;
+}
+
+#bio-text{
+  margin-bottom: 1em;
 }
 
 #insight {
   grid-area: insightful-quote;
+  margin-bottom: 5rem;
 }
 
-#items-list {
-  grid-area: content;
+#insight-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1em;
+  margin: 1em 1em;
 }
+
+#insight-wrapper img {
+  max-width: 30vw;
+  box-sizing: border-box;  
+}
+
+#insight-wrapper p {
+  margin: 0 0;
+}
+
+#catalog {
+  grid-area: content;
+  margin-bottom: 1.5em;
+}
+
+#catalog-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
+
 
 

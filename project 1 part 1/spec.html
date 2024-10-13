@@ -9,85 +9,123 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/d76c5cb4ae.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 	<div id="wrapper">
-		<div id="landing-images-left">
+		<div class="landing-images" id="landing-images-left">
 			<img src="images/dummy_500x800_ffffff_cccccc.png" id="left" alt="placeholder">
 		</div>	
-		<div id="landing-images-right">
+		<div class="landing-images" id="landing-images-right">
 			<img src="images/dummy_500x200_ffffff_cccccc.png" id="right" alt="placeholder">
 			<img src="images/dummy_500x800_ffffff_cccccc.png" id="right1" alt="placeholder">
 		</div>
-		<div id="landing-bar-left-block"></div>
-		<div id="landing-bar-right-block"></div>
-		<div id="landing-text-margin-left"></div>
-		<div id="landing-text-margin-right"></div>
-		<section id="title">
+		<div class="background-color" id="landing-bar-left-block"></div>
+		<div class="background-color" id="landing-bar-right-block"></div>
+		<div class="background-color" id="landing-text-margin-left"></div>
+		<div class="background-color" id="landing-text-margin-right"></div>
+		<section class="background-color" id="title">
 			<div class="black-box" id="id-number">
 				<subtitle>Lorem, ipsum.</subtitle>
 			</div>
 			<h1 id="title-text1">Lorem</h1>
 			<h1 id="title-text2">Lorem, ipsum.</h1>
 		</section>
-		<footer>
-			<div id="phone-number-head">
+		<footer class="background-color">
+			<div id="contact-head">
 				<img src="images/dummy_76x76_ffffff_cccccc.png" alt="placeholder">
-				<div id="phone">
-					<p class="black-box" id="contact">Lorem</p>
-					<div id="phone-numbers">
-						<img src="images/dummy_76x76_ffffff_cccccc.png" alt="placeholder">
-						<p>Lorem</p>
-						<p>Lorem</p>
+				<div id="phone-head">
+					<h1 class="black-box" id="contact">Lorem</h1>
+					<div class="contact-wrapper">
+						<i class="fa-solid fa-square-phone"></i>
+						<div class="contact-details">
+							<p class="contact-text">Lorem</p>
+							<p class="contact-text">Lorem</p>
+						</div>
+					</div>	
+				</div>
+			</div>	
+			<div class="line"></div>
+			<div id="other-info">
+				<div class="contact-wrapper">
+					<i class="fa-solid fa-globe" id="website-icon"></i>
+					<div class="contact-details">
+						<p class="contact-text">Lorem</p>
+						<p class="contact-text">Lorem</p>
+					</div>
+				</div>
+				<div class="contact-wrapper">
+					<i class="fa-solid fa-location-dot" id="location-icon"></i>
+					<div class="contact-details">
+						<p class="contact-text">Lorem</p>
+						<p class="contact-text">Lorem</p>
 					</div>
 				</div>
 			</div>	
-			<hr>
-			<img src="images/dummy_76x76_ffffff_cccccc.png" alt="placeholder">
-			<img src="images/dummy_76x76_ffffff_cccccc.png" alt="placeholder">
-
 		</footer>
-		<section id="thank-you">
-			<div id="subtitle">
-				<h2>Lorem, ipsum.</h2>
+		<section class="non-grid-margin" id="thank-you">
+			<h1 class="black-box">Lorem, ipsum.</h1>
+			<p>Lorem ipsum dolor sit amet.</p>
+			<p>Lorem ipsum dolor sit amet.</p>
+		</section>
+		<section class="non-grid-margin" id="about">
+			<h1 class="section-title-text">Lorem, ipsum.</h1>
+		</section>
+		<section class="non-grid-margin" id="bio">
+			<img src="images/dummy_500x800_ffffff_cccccc.png" id="bio-image">
+			<div id="bio-text">
+				<h2 class="alex-brush-regular">Lorem, ipsum.</h2> 
+				<p>Lorem ipsum</p>
+				<p>Lorem, ipsum dolor.</p>
+				<div class="line"></div>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.  Ex, assumenda!</p>
 			</div>
-			<p>Lorem ipsum dolor sit amet.</p>
-			<p>Lorem ipsum dolor sit amet.</p>
-		<section id="about">
-			<h1>Lorem, ipsum.</h1>
 		</section>
-		<section id="bio">
-			<img src="images/dummy_500x800_ffffff_cccccc.png">
-			<h2>Lorem, ipsum.</h2>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-					Ex, assumenda!</p>
-		</section>
-		<div id="insight">
-			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-				Facilis, accusamus. Quisquam odit illo suscipit repellat nemo 
-				assumenda unde doloribus obcaecati minima aliquam necessitatibus 
-				ea, voluptas distinctio dolore cumque veniam ad.</p>
-			<img src="images/dummy_500x600_ffffff_cccccc.png">
+		<div class="background-color non-grid-margin" id="insight">
+			<div class="background-color" id="insight-wrapper">
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing 
+					elit.</p>
+				<img src="images/dummy_500x600_ffffff_cccccc.png">
+			</div>
 		</div>
-		<section id="items-list">
-			<h1>Lorem, ipsum.</h1>
-			<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
-			<h3>Lorem</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Dolorum, facilis!</p>
-			<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
-			<h3>Lorem</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Dolorum, facilis!</p>
-			<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
-			<h3>Lorem</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Dolorum, facilis!</p>
-			<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
-			<h3>Lorem</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				Dolorum, facilis!</p>
+		<section class="non-grid-margin" id="catalog">
+			<h1 class="section-title-text">Lorem, ipsum.</h1>
+			<div id="catalog-wrapper">
+				<div class="catalog-item">
+					<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
+					<div class="catalog-text">
+						<h2>Lorem</h2>
+						<subtitle>Lorem ipsum dolor sit amet, consectetur</subtitle>
+						<p class="yellow-box">Lorem</p>
+					</div>
+				</div>	
+				<div class="catalog-item">
+					<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
+					<div class="catalog-text">
+						<h2>Lorem</h2>
+						<subtitle>Lorem ipsum dolor sit amet, consectetur</subtitle>
+						<p class="yellow-box">Lorem</p>
+					</div>
+				</div>
+				<div class="catalog-item">
+					<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
+					<div class="catalog-text">
+						<h2>Lorem</h2>
+						<subtitle>Lorem ipsum dolor sit amet, consectetur</subtitle>
+						<p class="yellow-box">Lorem</p>
+					</div>
+				</div>
+				<div class="catalog-item">
+					<img src="images/dummy_500x400_ffffff_cccccc.png" class="catalog-images">
+					<div class="catalog-text">
+						<h2>Lorem</h2>
+						<subtitle>Lorem ipsum dolor sit amet, consectetur</subtitle>
+						<p class="yellow-box">Lorem</p>
+					</div>
+				</div>
+			</div>
 		</section>
 	</div>
 </body>
