@@ -79,7 +79,7 @@ body {
   flex-basis: 0;
 }
 
-.catalog-text subtitle {
+.catalog-text p:first-of-type {
   display: block;
   margin: 0.125em 0;
   overflow: hidden;
@@ -157,8 +157,13 @@ body {
 
 #id-number {
   margin-top: 3em;
+  margin-bottom: 0.2em;
 }
 
+#id-number p {
+  margin: 0 0;
+  font-size: 0.6em;
+}
 
 #title-text1 {
   margin-bottom: 0.2em;
@@ -218,8 +223,9 @@ footer {
   margin: 5rem 10%;
 }
 
-#thank-you h1 {
+#thank-you h2 {
   margin-bottom: 0;
+  font-size: 1.2em;
 }
 
 #thank-you p {
@@ -326,7 +332,7 @@ footer {
 
   footer {
     padding-bottom: 4em;
-  };
+  }
 
   #contact-head {
     margin-top: 6em;
