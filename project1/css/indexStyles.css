@@ -107,61 +107,45 @@ body {
 
 #wrapper {
   display: grid;
+  /* grid-template-areas: */
+    /* "landing-images-empty-left landing-images-left landing-images-right landing-images-empty-right" */
+    /* "landing-bar-left-block landing-bar-left-block landing-images-right landing-bar-right-block" */
+    /* "landing-bar landing-bar landing-bar landing-bar" */
+    /* "footer footer footer footer" */
+    /* "thank-you thank-you thank-you thank-you" */
+    /* "bio bio bio bio" */
+    /* "content content content content"; */
+  /* grid-template-columns: 10% 40% 40% 10%; */
+  /* grid-template-rows: repeat(7, auto); */
   grid-template-areas:
-    "landing-images-empty-left landing-images-left landing-images-right landing-images-empty-right"
-    "landing-bar-left-block landing-bar-left-block landing-images-right landing-bar-right-block"
-    "landing-bar landing-bar landing-bar landing-bar"
-    "footer footer footer footer"
-    "thank-you thank-you thank-you thank-you"
-    "bio bio bio bio"
-    "content content content content";
-  grid-template-columns: 10% 40% 40% 10%;
-  grid-template-rows: repeat(7, auto);
-  height: 100%;
+    "landing"
+    "catalog";
+  grid-template-rows: 1vw auto;
 }
 
-/* Landing images */
-#landing-images-left img, #landing-images-right img {
-  max-width: 40vw;
-  width: auto;
-  height: auto;
-  box-sizing: border-box;
-  border: .5em solid white;
-}
+#landing {
+  grid-area: landing;
+  grid-template-areas: 
+    "name pic"
+    "title pic"
+    "contact pic"
+    "contact contact"
+    "catalog catalog";
+  grid-template-columns:auto 1fr;
+  grid-template-rows: repeat(5, auto);
 
-#landing-images-left {
-  grid-area: landing-images-left;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-#landing-images-right {
-  grid-area: landing-images-right;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#landing-bar-left-block {
-  grid-area: landing-bar-left-block;
-}
-
-#landing-bar-right-block {
-  grid-area: landing-bar-right-block;
 }
 
 #title {
-  grid-area: landing-bar;
-  padding: 0 10%;
+  grid-area: name;
 }
 
-#id-number {
+#subtitle {
   margin-top: 3em;
   margin-bottom: 0.2em;
 }
 
-#id-number p {
+#subtitle p {
   margin: 0 0;
   font-size: 1.1em;
 }
