@@ -12,6 +12,7 @@ body {
   background-color: black;
   color: white;
   font-weight: 600;
+  justify-content: center;
 }
 
 .background-color {
@@ -164,17 +165,18 @@ body {
 #title {
   grid-area: title;
   align-self: self-start;
+  border: white 10px solid;
 }
 
 #title p {
-  margin: 0 0;
+  margin: 0.5em;
   font-size: 1.1em;
 }
 
 #headshot {
   max-width: 50vw;
   box-sizing: border-box;
-  border: black 10px solid;
+  border: white 10px solid;
   grid-area: pic;
 }
 
@@ -185,15 +187,15 @@ footer {
 
 #contact-head {
   display: flex;
-  min-width: 0;
   gap: 1em;
   margin: 1em 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
-#contact-head img {
-  flex: 1 1 0;
-  max-width: 5rem;
-  max-height: 5rem;
+#contact-head div {
+  width: 100%;
+  border: white 10px solid;
 }
 
 #phone-head {
@@ -201,13 +203,13 @@ footer {
   flex-direction: column;
   min-height: 0;
   min-width: 0;
+  justify-content: stretch;
 }
 
 #contact {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 1em;
-  text-align: center;
 }
 
 #phone-numbers {
