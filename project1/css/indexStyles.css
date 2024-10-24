@@ -8,7 +8,7 @@ body {
 
 .black-box {
   padding: 0.2em 0.5em;
-  display: inline-flex;
+  display: flex;
   background-color: black;
   color: white;
   font-weight: 600;
@@ -27,7 +27,7 @@ body {
 }
 
 .title-text{
-  margin-top: 0.2em;
+  margin: 0.2em 0.2em;
   text-transform: uppercase;
   display: block;
   font-size: 3em;
@@ -120,48 +120,66 @@ body {
   grid-template-areas:
     "landing"
     "catalog";
-  grid-template-rows: 1vw auto;
+  grid-template-rows: 100vw auto;
+  background-color: #ffaf00;
 }
 
 #landing {
   grid-area: landing;
+  display: grid;
   grid-template-areas: 
+    "name nav"
     "name pic"
     "title pic"
     "contact pic"
-    "contact contact"
-    "catalog catalog";
-  grid-template-columns:auto 1fr;
-  grid-template-rows: repeat(5, auto);
+    "check-out check-out";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(5, min-content);
 
+}
+
+#name {
+  grid-area: name;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0.9em;
+}
+
+#navbar {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  text-align: center;
+  justify-content: space-evenly;
+  gap: 1em;
+  font-weight: 800;
+}
+
+#navbar a:visited{
+  color: black;
 }
 
 #title {
-  grid-area: name;
+  grid-area: title;
+  align-self: self-start;
 }
 
-#subtitle {
-  margin-top: 3em;
-  margin-bottom: 0.2em;
-}
-
-#subtitle p {
+#title p {
   margin: 0 0;
   font-size: 1.1em;
 }
 
-#title-text1 {
-  margin-bottom: 0.2em;
-  font-weight: 600;
-}
-
-#title-text2 {
-  font-weight: 800;
-  margin-bottom: 1.5em;
+#headshot {
+  max-width: 50vw;
+  box-sizing: border-box;
+  border: black 10px solid;
+  grid-area: pic;
 }
 
 footer { 
-  grid-area: footer;
+  grid-area: contact;
   padding: 0 10%;
 }
 
@@ -269,7 +287,7 @@ footer {
 }
 
 #catalog {
-  grid-area: content;
+  grid-area: catalog;
   margin-bottom: 1.5em;
 }
 
