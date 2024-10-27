@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #ffaf00;
 }
 
 * {
@@ -13,6 +14,7 @@ body {
   color: white;
   font-weight: 600;
   justify-content: center;
+  font-size: 3.5vw;
 }
 
 .background-color {
@@ -31,7 +33,7 @@ body {
   margin: 0.2em 0.2em;
   text-transform: uppercase;
   display: block;
-  font-size: 3em;
+  font-size: 4em;
 }
 
 .fa-solid {
@@ -39,15 +41,13 @@ body {
   align-self: center;
 }
 
-
-
 .section-title-text {
   text-transform: uppercase;
   font-size: 2em;
 }
 
 .non-grid-margin {
-  margin: 0 10%;
+  margin: 0 10vw;
 }
 
 .line {
@@ -64,6 +64,7 @@ body {
 
 .catalog-item > .black-box {
   align-self: flex-start;
+  order: 0;
   margin-bottom: 1em;
 }
 .catalog-item > .black-box > h2 {
@@ -71,8 +72,8 @@ body {
 }
 
 .description {
+  order: 2;
   width: 100%;
-  background-color: white;
 }
 
 .description > p {
@@ -82,6 +83,7 @@ body {
 
 .catalog-item img {
   max-width: 80vw;
+  order: 1;
 }
 
 .yellow-box {
@@ -106,7 +108,7 @@ body {
   grid-template-areas:
     "landing"
     "catalog";
-  grid-template-rows: 100vh auto;
+  grid-template-rows: auto auto;
   background-color: #ffaf00;
 }
 
@@ -118,9 +120,19 @@ body {
     "title title"
     "pic pic"
     "contact contact"
-    "check-out check-out";
-  grid-template-columns: min-content auto;
-  grid-template-rows: 18% min-content 30% auto 20%;
+    "line line";
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: 18% min-content auto min-content min-content;
+}
+
+#filler, #filler-right, 
+#margin-right-bottom, #margin-left-bottom,
+#middle-spacer-right, #middle-spacer-left{
+  display: none;
+}
+
+#banner {
+  display: none;
 }
 
 #name {
@@ -132,19 +144,40 @@ body {
   background-color: #ffaf00;
 }
 
-#navbar {
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  text-align: center;
-  justify-content: space-evenly;
-  gap: 1em;
-  font-weight: 800;
+#name a{
+  text-decoration: none;
 }
 
-#navbar a:visited{
+a:link {
   color: black;
+}
+
+a:visited{
+  color: black;
+}
+
+a:hover {
+  color: white;
+}
+
+a:active {
+  color: white;
+}
+
+#banner a:hover{
+  color:#ffaf00;
+}
+
+#banner a:active{
+  color: black;
+}
+
+.catalog-item a:link {
+  color:white;
+}
+
+.catalog-item a:visited {
+  color:white;
 }
 
 #title {
@@ -152,26 +185,27 @@ body {
   align-self: center;
 }
 
-#black-box > h2 {
-  margin: 0.5em;
-  font-size: 1.1em;
-}
-
 #headshot {
   grid-area: pic;
-  display: flex;
-  justify-content: center;
   background-color: white;
+  margin: 0 1vw;
+}
+
+#bio {
+  font-size: 1em;
+  border: 10px white solid;
 }
 
 #headshot > img {
   max-width: 50vw;
-  align-self: center;
-}
+  border: 10px white solid;
+  float: left;
+ }
 
 #headshot > section {
   align-self: center;
 }
+
 footer { 
   grid-area: contact;
   padding: 0 10%;
@@ -190,30 +224,16 @@ footer {
   display: flex;
   width: 80%;
   padding: 5px;
-  justify-content: space-around;
-  margin: 0;
-}
-
-#contact {
-  margin-top: 0;
-  margin-bottom: 0;
+  justify-content: space-evenly;
 }
 
 #contact > h2 {
   margin: .5em;
 }
 
-
-#banner {
-  grid-area: check-out;
-  display: flex;
-  background-color: white;
-  align-items: center;
-}
-
-#banner > h2 {
-  text-align: center;
-  margin: 2.5em;
+#separator {
+  grid-area: line;
+  margin: 10vw 20vw;
 }
 
 #catalog {
@@ -228,8 +248,25 @@ footer {
 }
 
 @media screen and (min-width: 850px) {
+  .non-grid-margin {
+    margin: 0 4vw;
+  }
+  .catalog-item {
+    max-width: 38vw;
+  }
+
+  .catalog-item > .black-box {
+    font-size: 1.7em;
+  }
+  
   .catalog-item img {
-    max-width: 40%;
+    max-width: 38vw;
+    align-self: start;
+  }
+
+  .description p {
+    font-size: 1em;
+    margin: 0.7em 0;
   }
 
   .black-box {
@@ -238,34 +275,91 @@ footer {
     background-color: black;
     color: white;
     font-weight: 600;
-    font-size: 2em;
+    font-size: 1vw;
+  }
+  
+  .black-box h2 {
+    text-align: center;
   }
 
   .title-text{
-    font-size: 2em;
+    font-size: 8vw;
+  }
+
+  .section-title-text {
+    font-size: 4em;
   }
 
   #wrapper {
     display: grid;
     grid-template-areas:
-      "landing-images-empty-left landing-images-left landing-images-right landing-images-empty-right bio"
-      "landing-bar-left-block landing-bar-left-block landing-images-right landing-bar-right-block landing-bar-right-block"
-      "footer landing-bar landing-bar landing-bar landing-bar"
-      "content content content content content"
-      "content content content content content";
-    grid-template-columns: 5% 20% 20% 5% 50%;
-    grid-template-rows: repeat(5, auto);
+      "landing" 
+      "catalog";
+    grid-template-rows: 100vh auto;
     height: 100%;
   }
 
-  #landing-images-left img, #landing-images-right img {
-    max-width: 20vw;
-    border: 1em solid white;
+  #filler, #filler-right, 
+  #margin-right-bottom, #margin-left-bottom,
+  #middle-spacer-right, #middle-spacer-left{
+    display: block;
   }
 
-  #id-number p {
-    margin: 0 0;
-    font-size: 0.6em;
+  #separator {
+    display: none;
+  }
+
+  #landing {
+    display: grid;
+    grid-template-areas:
+      "margin-left-top name name title margin-right-top"
+      "margin-left-middle pic pic pic margin-right-middle"
+      "filler contact filler-right filler-right filler-right"
+      "margin-left-bottom check-out check-out check-out margin-right-bottom";
+    grid-template-columns: 3vw 0.7fr 1fr 1fr 3vw;
+    grid-template-rows: repeat(4, auto);
+  }
+
+  #title {
+    margin: 1em 0;
+  }
+
+  #middle-spacer-left {
+    grid-area: margin-left-middle;
+    background-color: white;
+  }
+
+  #middle-spacer-right {
+    grid-area: margin-right-middle;
+    background-color: white;
+  }
+
+  #margin-right-bottom {
+    grid-area: margin-right-bottom;
+    background-color: white;
+  }
+
+  #margin-left-bottom {
+    grid-area: margin-left-bottom;
+    background-color: white;
+  }
+
+  #headshot {
+    background-color: white;
+  }
+
+  #headshot > img {
+    max-width: 20vw;
+    border: 1vw white solid;
+  }
+
+  #bio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-area: bio;
+    font-size: 1em;
+    background-color: white;
   }
 
   footer {
@@ -273,33 +367,49 @@ footer {
   }
 
   #contact-head {
-    margin-top: 6em;
     align-items: center;
+    background-color:#ffaf00;
   }
 
-  #contact {
-    font-size: 1.5em;
+  #banner {
+    font-size: 2vw;
+    justify-content: center;
+    margin: 0 1vw;
   }
 
-  #about{
-    justify-self: start;
-    margin-bottom: 0;
+  #filler {
+    grid-area: filler;
   }
 
-  #bio {
-    margin-bottom: 1rem;
+  #filler-right {
+    grid-area: filler-right;
+    background-color: #ffaf00;
   }
 
-  #bio-image {
-    max-width: 20vw;
+  #banner {
+    grid-area: check-out;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #banner > h2 {
+    margin: 0;
   }
 
-  #insight-wrapper img {
-    max-width: 10vw;
+  #contact-wrapper {
+    justify-content: space-evenly;
+  }
+
+  #catalog-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: white;
+    border: 3em white solid;
   }
 }
-
-
 
 
 
