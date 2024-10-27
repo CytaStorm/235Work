@@ -104,9 +104,8 @@ body {
 #wrapper {
   display: grid;
   grid-template-areas:
-    "landing"
-    "catalog";
-  grid-template-rows: 100vh auto;
+    "landing";
+  grid-template-rows: auto;
   background-color: #ffaf00;
 }
 
@@ -116,11 +115,10 @@ body {
   grid-template-areas: 
     "name nav"
     "title title"
-    "pic pic"
-    "contact contact"
-    "check-out check-out";
+    "catalog catalog"
+    "contact contact";
   grid-template-columns: min-content auto;
-  grid-template-rows: 18% min-content 30% auto 20%;
+  grid-template-rows: 18vh min-content auto 20vh;
 }
 
 #name {
@@ -130,6 +128,7 @@ body {
   align-items: center;
   line-height: 0.9em;
   background-color: #ffaf00;
+  margin: 16px;
 }
 
 #navbar {
@@ -159,19 +158,23 @@ body {
 
 #headshot {
   grid-area: pic;
-  display: flex;
-  justify-content: center;
   background-color: white;
+  padding: 0 1em;
 }
 
 #headshot > img {
   max-width: 50vw;
   align-self: center;
+  margin-right: 1em;
+  margin-top: 1em;
+  float: left;
 }
 
 #headshot > section {
   align-self: center;
+  font-size: 0.9em;
 }
+
 footer { 
   grid-area: contact;
   padding: 0 10%;
@@ -203,19 +206,6 @@ footer {
   margin: .5em;
 }
 
-
-#banner {
-  grid-area: check-out;
-  display: flex;
-  background-color: white;
-  align-items: center;
-}
-
-#banner > h2 {
-  text-align: center;
-  margin: 2.5em;
-}
-
 #catalog {
   grid-area: catalog;
   margin-bottom: 1.5em;
@@ -226,7 +216,6 @@ footer {
   gap: 3em;
   flex-direction: column;
 }
-
 @media screen and (min-width: 850px) {
   .catalog-item img {
     max-width: 40%;
