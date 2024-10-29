@@ -1,24 +1,21 @@
+body {
+  background-image: url("../img/Ancestor_House_of_Ruin.webp");
+}
+
 #wrapper {
   display: grid;
   grid-template-areas:
     "header"
-    "image"
     "response"
     "button"
     "footer";
   grid-template-rows: repeat(4, auto);
   justify-items: center;
-  background-color: black;
 }
 
 #wrapper > h1 {
   grid-area: header;
   color: yellow;
-}
-
-#wrapper > img {
-  grid-area: image;
-  width: 50%;
 }
 
 #response {
