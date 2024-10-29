@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="CSS/random-phrases-styles.css">
+	<title>Random Phrases</title>
+</head>
+<body>
+	<div id="wrapper">
+		<h1>
+			<header>Darkest Dungeon Narrator's Quotes</header>
+		</h1>
+		<img src="img/Ancestor_House_of_Ruin.webp" alt="The Ancestor writing his final words.">
+		<p id="response">Quote</p>
+		<button>Generate quote!</button>
+		<footer><p>Jeff Chen</p></footer>
+	</div>
+</body>
+<script>
+	let phraseList = [
+		"Perched at the very precipice of oblivion...",
+		"A hand-breadth from becoming unwound...",
+		"Teetering on the brink, facing the abyss...",
+		"And now the true test... hold fast, or expire?",
+		"As life ebbs, terrible vistas of emptiness reveal themselves."
+	]
+
+	const getRandomArbitrary  = (min, max) => {
+	  return Math.random() * (max - min) + min;
+	}
+
+	const displayQuote = () => {
+		let randomIndex = Math.floor(getRandomArbitrary(0, phraseList.length));
+		document.querySelector("#response").innerHTML = 
+			phraseList[randomIndex];
+		return;
+	}
+
+	displayQuote();
+
+	const generateQuoteButton = document.querySelector("button");
+	generateQuoteButton.addEventListener("click", displayQuote);
+
+
+</script>
+</html>
