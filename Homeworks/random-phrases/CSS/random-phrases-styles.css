@@ -1,3 +1,9 @@
+.eagle-lake-regular {
+  font-family: "Eagle Lake", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   background-image: url("../img/Ancestor_House_of_Ruin.webp");
 }
@@ -15,16 +21,48 @@ body {
 
 #wrapper > h1 {
   grid-area: header;
-  color: yellow;
+  font-family: "Eagle Lake";
+  color: #edde91;
+  text-shadow: #edde91 0 0 10px;
 }
 
 #response {
   grid-area: response;
-  color: white;
+  text-shadow: #d1d1d1 0 0 10px;
+  font-family: "Eagle Lake";
+  color: #999999;
+  background-color: #1f1f1f;
+  padding: 10px;
+  border: 10px #464646 solid;
+  box-shadow: #d1d1d1 0 0 20px;
 }
 
 button {
   grid-area: button;
+  background-color: black;
+  outline: none;
+  font-family: "Eagle Lake";
+  border: none;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+  color: gray;
+  margin-top: 1em;
+}
+
+button:hover {
+  box-shadow: whitesmoke 0 0 20px;
+  text-shadow: whitesmoke 0 0 20px;
+  color: #a1a1a1;
+  border-top: 2px solid #a1a1a1;
+  border-bottom: 2px solid #a1a1a1;
+}
+
+button:active {
+  box-shadow: black 0 0 20px;
+  text-shadow: black 0 0 20px;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  color:white;
 }
 
 #footer {
@@ -32,5 +70,8 @@ button {
 }
 
 footer > p {
+  color: white;
+  font-family: "Eagle Lake";
+  font-size: 0.7em;
   color: white;
 }
