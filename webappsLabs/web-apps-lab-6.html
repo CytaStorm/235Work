@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Web Apps-4-HW</title>
+	<style>
+		body {
+			border: 1px solid gray;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>My Favorites</h1>
+	<h2>My Favorite Colors</h2>
+
+	<ol id="colorsList">
+
+	</ol>
+
+	<h2>My Favorite Foods</h2>
+
+	<ol id="foodsList">
+
+	</ol>
+
+	<h2>My Favorite Links</h2>
+
+	<ol id="linksList">
+
+	</ol>
+
+</body>
+
+<script>
+	"use strict";
+	let colors = ["gold", "blue", "orange", "white", "black"];
+	let foods = ["rice", "beans", "salmon", "cheese", "scallion pancakes"]; // add some foods
+
+	for (let i = 0; i < colors.length; i++) {
+		let colorList = document.querySelector("#colorsList");
+		let colorListItem = document.createElement("li");
+		colorListItem.innerHTML = colors[i];
+		colorList.appendChild(colorListItem);
+	}
+
+	for (var food of foods) {
+		let foodList = document.querySelector("#foodsList")
+		let foodListItem = document.createElement("li");
+		foodListItem.innerHTML = food;
+		foodList.appendChild(foodListItem);
+	}
+	// Optional - can you figure out how to pull both the key AND the value
+	// from the `links` object literal?
+	let linksList = document.querySelector("#linksList");
+	let links = {
+		"YouTube": "https://www.youtube.com/",
+		"r/longboarding": "https://www.reddit.com/r/longboarding/",
+		"Ebay": "https://www.ebay.com/"
+	}
+
+	for (let tuple in links) {
+		let linksListItem = document.createElement("li");
+		let linkName = linksListItem.appendChild(document.createElement("a"));
+		linkName.innerHTML = tuple;
+		linkName.setAttribute("href", links[tuple]);
+		linksList.appendChild(linksListItem);
+	}
+
+
+</script>
+
+</html>
