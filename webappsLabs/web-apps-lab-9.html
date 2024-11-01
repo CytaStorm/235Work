@@ -27,6 +27,12 @@ What is your favorite color ->
 <script>
 
 /* This stuff happens "onload" */
+
+const changeBackgroundColor = () => {
+  document.querySelector("body").style.backgroundColor = localStorage.getItem(colorKey);
+	console.log("called");
+}
+
 // declare some constants
 const nameField = document.querySelector("#nameField");
 const colorSelect = document.querySelector("#colorSelect");
@@ -37,6 +43,8 @@ const colorKey = prefix + "color";
 // grab the stored data, will return `null` if the user has never been to this page
 const storedName = localStorage.getItem(nameKey);
 const storedColor = localStorage.getItem(colorKey);
+
+changeBackgroundColor();
 
 // if we find a previously set name value, display it
 if (storedName){
@@ -58,9 +66,6 @@ if (storedColor){
 nameField.onchange = e=>{ localStorage.setItem(nameKey, e.target.value); };
 colorSelect.onchange = e=>{ localStorage.setItem(colorKey, e.target.value); };
 
-const changeBackgroundColor = () => {
-  document.querySelector("body").style.backgroundColor = localStorage.getItem(colorKey);
-}
 
 colorSelect.addEventListener('change', changeBackgroundColor);
 
