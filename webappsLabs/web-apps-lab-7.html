@@ -22,7 +22,8 @@
          */
         window.onload = function () {
             makeSampleMonsters();
-            showMonsters();
+            showMonsters("#goombas", "goomba");
+            showMonsters("#boos", "boo");
         }
 
         /**
@@ -38,18 +39,28 @@
             monsters.push(monster);
             monster = makeGoomba("Alice", 40, 150, 200);
             monsters.push(monster);
+
+            monster = makeBoo("Abby", 40, 150, 200);
+            monsters.push(monster);
+            monster = makeBoo("Bernard", 40, 150, 200);
+            monsters.push(monster);
+            monster = makeBoo("Connor", 40, 150, 200);
+            monsters.push(monster);
         }
 
         /**
          * Function that shows our monsters (just Goombas for now)
          * 
          */
-        function showMonsters() {
-            let goombaList = document.querySelector("#goombas");
+        function showMonsters(listId, type) {
+            let monsterList = document.querySelector(`${listId}`);
 
             for (let i = 0; i < monsters.length; i++) {
                 let liStr = "";
                 let li = document.createElement("li");
+                if (monsters[i].type !== type) {
+                    continue;
+                }
 
                 for (let key in monsters[i]) {
                     if (typeof monsters[i][key] !== "function") {
@@ -57,7 +68,7 @@
                     }
                 }
                 li.innerHTML = liStr;
-                goombaList.appendChild(li);
+                monsterList.appendChild(li);
             }
         }
 
@@ -73,7 +84,8 @@
                 score: 100,
                 status: function () {
                     console.log("name: " + this.name + ", hp: " + this.hp + ", speed: " + this.speed + ", score: " + this.score);
-                }
+                },
+                type: undefined
             }
         }
 
@@ -91,9 +103,27 @@
                 goomba.hp -= dmgVal;
             }
             goomba.powerUp = powerUp;
+            goomba.type = "goomba";
 
             Object.seal(goomba);
             return goomba;
+        }
+
+        //Create a boo
+        function makeBoo(name, hp, speed, score) {
+            let boo = createBaseMonster();
+            boo.name = name;
+            boo.hp = hp;
+            boo.speed = speed;
+            boo.score = score;
+            boo.takeDamage = function (dmgVal) {
+                boo.hp -= dmgVal;
+            }
+            boo.powerUp = powerUp;
+            boo.type = "boo";
+
+            Object.seal(boo);
+            return boo;
         }
 
         /**
@@ -113,6 +143,9 @@
     <div id="lineUp">
         <h1>Goombas</h1>
         <ul id="goombas">
+        </ul>
+        <h1>Boos</h1>
+        <ul id="boos">
         </ul>
     </div>
 </body>
