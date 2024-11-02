@@ -80,35 +80,33 @@
         <p>For IGME-235 Intro to Game Web Tech</p>
      </footer>
     </section>
+	</body>
   <script>
 	/*
 	The name of the image is stored in the data-image (custom data) attribute of each
 	span. In JavaScript we access these custom data properties using the .dataset 
 	property. We also covered this in web-apps-6.
 	*/
-	let cassie = document.querySelector('[title=A black dog"]');
-	print(cassie.innerHTML);
-	let seal =  document.querySelector('[title=A gray seal"]');
-	let wolf = document.querySelector('[title=A white wolf"]');
-	let eagle = document.querySelector('[title=A bald eagle"]');
+	let cassie = document.querySelector('[title="A black dog"]');
+	let seal =  document.querySelector('[title="A gray seal"]');
+	let wolf = document.querySelector('[title="A white wolf"]');
+	let eagle = document.querySelector('[title="A bald eagle"]');
 	let img = document.querySelector("#placeholder");
 
 	cassie.addEventListener("click", () => {
-		img.setAttribute("src", "images/cassie.jpg");
+		img.setAttribute("src", `images/${cassie.dataset.image}`);
 	});
 
 	seal.addEventListener("click", () => {
-		img.setAttribute("src", "images/seal.jpg");
+		img.setAttribute("src", `images/${seal.dataset.image}`);
 	});
 	
 	wolf.addEventListener("click", () => {
-		img.setAttribute("src", "images/wolf.jpg");
+		img.setAttribute("src", `images/${wolf.dataset.image}`);
 	});
 
 	eagle.addEventListener("click", () => {
-		img.setAttribute("src", "images/wolf.jpg");
+		img.setAttribute("src", `images/${eagle.dataset.image}`);
 	});
 	</script>
-	   
-</body>
 </html>
