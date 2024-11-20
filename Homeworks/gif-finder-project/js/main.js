@@ -1,12 +1,52 @@
 // 1
 window.onload = (e) => 
-    { document.querySelector("#search").onclick = searchButtonClicked };
+    { document.querySelector("#search").onclick = searchButtonClicked;
+        document.querySelector("#next").onclick = nextButtonClicked;
+        document.querySelector("#back").onclick = backButtonClicked;
+     };
 
 // 2
 let displayTerm = "";
+let GIPHY_KEY = "V9rK692HR8uMfjk7g5LLHFFV4Hw70M5i";
+let currentPageOffset = 0;
+
+let history = [];
 
 // 3
 function searchButtonClicked() {
+    console.log("searchButtonClicked() called");
+
+    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+
+    let url = GIPHY_URL;
+    url += "api_key=" + GIPHY_KEY;
+
+    let term = document.querySelector("#searchterm").value;
+    displayTerm = term;
+
+    term = term.trim();
+
+    term = encodeURIComponent(term);
+
+    if (term.length < 1) return;
+
+    url += "&q=" + term;
+
+    let limit = document.querySelector("#limit").value;
+    url += "&limit=" + limit;
+    currentPageOffset = 0;
+
+    document.querySelector("#status").innerHTML = "<b>Searching for '" +
+        displayTerm + "'<b>";
+
+    console.log(url);
+    history.push(term);
+    console.group(history);
+    getData(url);
+}
+
+// 3
+function nextButtonClicked() {
     console.log("searchButtonClicked() called");
 
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
@@ -30,11 +70,41 @@ function searchButtonClicked() {
     let limit = document.querySelector("#limit").value;
     url += "&limit=" + limit;
 
-    document.querySelector("#status").innerHTML = "<b>Searching for '" +
-        displayTerm + "'<b>";
+    currentPageOffset += parseInt(limit);
+    console.log(currentPageOffset);
 
-    console.log(url);
+    url += `&offset=${currentPageOffset}`
+    getData(url);
+}
 
+function backButtonClicked() {
+    console.log("searchButtonClicked() called");
+
+    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+
+    let GIPHY_KEY = "5PuWjWVnwpHUQPZK866vd7wQ2qeCeqg7"
+
+    let url = GIPHY_URL;
+    url += "api_key=" + GIPHY_KEY;
+
+    let term = document.querySelector("#searchterm").value;
+    displayTerm = term;
+
+    term = term.trim();
+
+    term = encodeURIComponent(term);
+
+    if (term.length < 1) return;
+
+    url += "&q=" + term;
+
+    let limit = document.querySelector("#limit").value;
+    url += "&limit=" + limit;
+
+    if (currentPageOffset - parseInt(limit) > 0){
+        currentPageOffset -= parseInt(limit);
+        url += `&offset=${currentPageOffset}`
+    }
     getData(url);
 }
 
