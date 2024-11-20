@@ -11,6 +11,7 @@ let GIPHY_KEY = "V9rK692HR8uMfjk7g5LLHFFV4Hw70M5i";
 let currentPageOffset = 0;
 
 let history = [];
+let favImagesIDs = [];
 
 // 3
 function searchButtonClicked() {
