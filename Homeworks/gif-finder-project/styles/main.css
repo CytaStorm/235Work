@@ -32,7 +32,7 @@ header h1 {
 
 .result {
     position: relative;
-    height: 175px;
+    height: 235px;
     width: 100px;
     float: left;
     border: 1px solid gray;
@@ -42,9 +42,6 @@ header h1 {
 }
 
 .result img {
-    position: absolute;
-    left: 5px;
-    bottom: 5px;
     display: block;
 
 }
@@ -116,12 +113,19 @@ button:focus {
    text-align: center; 
 }
 
-#results > h2, #content > p{
+#content {
+    display: flex;
+}
+
+#results, #content > p{
     text-align: center;
+    display:block;
 }
 
 #results {
-    grid-area:results;
+    display: flex;
+    flex-direction: column;
+    grid-area:result-nav;
     justify-self: center;
 }
 

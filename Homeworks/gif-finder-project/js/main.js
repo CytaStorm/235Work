@@ -134,8 +134,20 @@ function dataLoaded(e) {
 
     let results = obj.data;
     console.log("results.length = " + results.length);
-    let bigString = "<p><i>Here are " + results.length + " results for '" +
-        displayTerm + "'</i></p>";
+    if (document.querySelectorAll("#resultText").length === 0){
+        let resultTextDiv = document.createElement("p");
+        resultTextDiv.id = "resultText";
+        resultTextDiv.innerHTML = `<p><i>Here are ${results.length} results for '
+        ${displayTerm}'</i></p>`
+
+        document.querySelector("#results")
+            .insertAdjacentElement("beforeend", resultTextDiv);
+    } else {
+        document.querySelector("resultText").innerHTML = 
+        `<p><i>Here are ${results.length} results for '${displayTerm}'</i>
+        </p>`;
+    }
+
 
     for (let i = 0; i < results.length; i++) {
         let result = results[i];
@@ -145,7 +157,8 @@ function dataLoaded(e) {
 
         let url = result.url;
 
-        let line = `<div class='result'><img src='${smallURL}' title= '${result.id}' />`;
+        let line = `<div class='result'><img src='${smallURL}' title= '${result.id}' />
+                <button class="btn">Button</button> `;
         line += `<span><a target='_blank' href='${url}'>View on Giphy</a></span>
 				<p>Rating: ${result.rating.toUpperCase()}</p></div>`;
         bigString += line;
