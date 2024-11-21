@@ -1,8 +1,24 @@
+let history = [];
+let favImages = [];
 // 1
 window.onload = (e) => 
-    { document.querySelector("#search").onclick = searchButtonClicked;
+    {
+        document.querySelector("#search").onclick = searchButtonClicked;
         document.querySelector("#next").onclick = nextButtonClicked;
         document.querySelector("#back").onclick = backButtonClicked;
+        favImages = localStorage.getItem("favImages");
+        favImages = JSON.parse(favImages);
+        if (favImages === null){
+            favImages = [];
+        }
+        //console.log("here " + favImages);
+        else {
+            // for (const fav of favImages) {
+                // addToFavorites({id: fav.id, imgURL: fav.imgURL});
+                //}
+            console.log(favImages);
+        }
+        debugger;
      };
 
 // 2
@@ -10,28 +26,40 @@ let displayTerm = "";
 let GIPHY_KEY = "V9rK692HR8uMfjk7g5LLHFFV4Hw70M5i";
 let currentPageOffset = 0;
 
-let history = [];
-let favImagesIDs = [];
 
 // let dropButton = document.querySelector(".dropbtn");
 // dropButton.onmouseover = (e) => {
 	
 // } 
 
-let addToFavorites = (e, f) => {
-    if (favImagesIDs.includes(e)){
+let addToFavorites = (e) => {
+    let dropDownMenu = document.querySelector(".dropdown-content")
+    if (favImages.includes(e)){
 		return;
     }
-    favImagesIDs.push(e);
+    favImages.push(e);
 	let newDiv = document.createElement("div");
 	let newImg = document.createElement("img");
-	newImg.src = f.src;
+	newImg.src = e.imgURL;
 	let newLink = document.createElement("a");
+    let removeButton = document.createElement("button");
 	newLink.href = "#";
-	newLink.innerHTML = e;
-	document.querySelector(".dropdown-content").appendChild(newDiv);
+	newLink.innerHTML = e.id;
+	dropDownMenu.appendChild(newDiv);
 	newDiv.appendChild(newImg);
+    newDiv.appendChild(removeButton);
 	newDiv.appendChild(newLink);
+
+    removeButton.onclick = (a) => {
+        dropDownMenu.removeChild(removeButton.parentElement);
+        favImages = favImages.filter((e) => e.id != newLink.innerHTML);
+        console.log(favImages);
+    }
+
+    console.log(favImages);
+
+    let jsonedList = JSON.stringify(favImages);
+    localStorage.setItem("favImages", jsonedList);
 }
 // 3
 function searchButtonClicked() {
@@ -201,7 +229,7 @@ function dataLoaded(e) {
         let favoriteButton = document.createElement("button");
         favoriteButton.className = "favButton";
         favoriteButton.innerHTML = "Add to Favorites";
-        favoriteButton.onclick = () => addToFavorites(result.id, newImg);
+        favoriteButton.onclick = () => addToFavorites({id: result.id, imgURL: smallURL});
         newDiv.appendChild(favoriteButton);
 
         document.querySelector("#content").appendChild(newDiv);
