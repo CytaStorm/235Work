@@ -13,6 +13,12 @@ let currentPageOffset = 0;
 let history = [];
 let favImagesIDs = [];
 
+let addToFavorites = (e) => {
+    if (!favImagesIDs.includes(e)){
+        favImagesIDs.push(e);
+        console.log(favImagesIDs);
+    }
+}
 // 3
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
@@ -122,6 +128,7 @@ function getData(url) {
 function dataLoaded(e) {
     let xhr = e.target;
 
+    document.querySelector("#content").textContent = '';
     console.log(xhr.responseText);
 
     let obj = JSON.parse(xhr.responseText);
@@ -134,20 +141,19 @@ function dataLoaded(e) {
 
     let results = obj.data;
     console.log("results.length = " + results.length);
+    document.querySelector("#results > p").remove();
     if (document.querySelectorAll("#resultText").length === 0){
         let resultTextDiv = document.createElement("p");
         resultTextDiv.id = "resultText";
         resultTextDiv.innerHTML = `<p><i>Here are ${results.length} results for '
         ${displayTerm}'</i></p>`
 
-        document.querySelector("#results")
-            .insertAdjacentElement("beforeend", resultTextDiv);
+        document.querySelector("#results").insertBefore(resultTextDiv, document.querySelector("#content"));
     } else {
         document.querySelector("resultText").innerHTML = 
         `<p><i>Here are ${results.length} results for '${displayTerm}'</i>
         </p>`;
     }
-
 
     for (let i = 0; i < results.length; i++) {
         let result = results[i];
@@ -157,18 +163,41 @@ function dataLoaded(e) {
 
         let url = result.url;
 
-        let line = `<div class='result'><img src='${smallURL}' title= '${result.id}' />
-                <button class="btn">Button</button> `;
-        line += `<span><a target='_blank' href='${url}'>View on Giphy</a></span>
-				<p>Rating: ${result.rating.toUpperCase()}</p></div>`;
-        bigString += line;
-    }
+        let newDiv = document.createElement("div");
+        newDiv.className = "result";
 
-    document.querySelector("#content").innerHTML = bigString;
+        let newImg = document.createElement("img");
+        newImg.src = smallURL;
+        newImg.title = result.id;
+        newDiv.appendChild(newImg);
+
+        let newSpan = document.createElement("span");
+        let newLink = document.createElement("a");
+        newLink.innerHTML = "View On Giphy";
+        newLink.target = "_blank";
+        newLink.href = url;
+        newSpan.appendChild(newLink);
+        
+        newDiv.appendChild(newSpan);
+
+        let newRating = document.createElement("p");
+        newRating.innerHTML = `Rating: ${result.rating.toUpperCase()}`;
+        newDiv.appendChild(newRating);
+
+        let favoriteButton = document.createElement("button");
+        favoriteButton.className = "favButton";
+        favoriteButton.innerHTML = "Add to Favorites";
+        favoriteButton.onclick = () => addToFavorites(result.id);
+        newDiv.appendChild(favoriteButton);
+
+        document.querySelector("#content").appendChild(newDiv);
+
+    }
 
     document.querySelector("#status").innerHTML = "<b>Success!</b>";
 
 }
+
 
 function dataError(e) {
     console.log("An error occurred");
