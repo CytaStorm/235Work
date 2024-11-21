@@ -13,11 +13,25 @@ let currentPageOffset = 0;
 let history = [];
 let favImagesIDs = [];
 
-let addToFavorites = (e) => {
-    if (!favImagesIDs.includes(e)){
-        favImagesIDs.push(e);
-        console.log(favImagesIDs);
+// let dropButton = document.querySelector(".dropbtn");
+// dropButton.onmouseover = (e) => {
+	
+// } 
+
+let addToFavorites = (e, f) => {
+    if (favImagesIDs.includes(e)){
+		return;
     }
+    favImagesIDs.push(e);
+	let newDiv = document.createElement("div");
+	let newImg = document.createElement("img");
+	newImg.src = f.src;
+	let newLink = document.createElement("a");
+	newLink.href = "#";
+	newLink.innerHTML = e;
+	document.querySelector(".dropdown-content").appendChild(newDiv);
+	newDiv.appendChild(newImg);
+	newDiv.appendChild(newLink);
 }
 // 3
 function searchButtonClicked() {
@@ -187,7 +201,7 @@ function dataLoaded(e) {
         let favoriteButton = document.createElement("button");
         favoriteButton.className = "favButton";
         favoriteButton.innerHTML = "Add to Favorites";
-        favoriteButton.onclick = () => addToFavorites(result.id);
+        favoriteButton.onclick = () => addToFavorites(result.id, newImg);
         newDiv.appendChild(favoriteButton);
 
         document.querySelector("#content").appendChild(newDiv);
