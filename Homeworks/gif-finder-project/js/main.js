@@ -1,24 +1,43 @@
 let history = [];
 let favImages = [];
+let favDropDownMenu;
+let histDropDownMenu;
+
+let loadFavoriteImages = () => {
+    favImages = JSON.parse(localStorage.getItem("favImages"));
+    if (favImages === null){
+        favImages = [];
+    }
+    //console.log("here " + favImages);
+    else {
+        //console.log(favImages);
+        for (const fav of favImages) {
+            loadFavorite({id: fav.id, imgURL: fav.imgURL});
+        }
+    }
+}
+
+let loadHistoryStartup = () => {
+	history = JSON.parse(localStorage.getItem("history"));
+	if (history === null) {
+		history = [];
+	}
+	else {
+		for (const hist of history){
+			loadHistory(hist);
+		}
+	}
+}
 // 1
 window.onload = (e) => 
     {
+        favDropDownMenu = document.querySelector("#favorites-content")
+        histDropDownMenu = document.querySelector("#history-content")
         document.querySelector("#search").onclick = searchButtonClicked;
         document.querySelector("#next").onclick = nextButtonClicked;
         document.querySelector("#back").onclick = backButtonClicked;
-        favImages = localStorage.getItem("favImages");
-        favImages = JSON.parse(favImages);
-        if (favImages === null){
-            favImages = [];
-        }
-        //console.log("here " + favImages);
-        else {
-            // for (const fav of favImages) {
-                // addToFavorites({id: fav.id, imgURL: fav.imgURL});
-                //}
-            console.log(favImages);
-        }
-        debugger;
+		loadFavoriteImages();
+		loadHistoryStartup();
      };
 
 // 2
@@ -26,41 +45,64 @@ let displayTerm = "";
 let GIPHY_KEY = "V9rK692HR8uMfjk7g5LLHFFV4Hw70M5i";
 let currentPageOffset = 0;
 
-
-// let dropButton = document.querySelector(".dropbtn");
-// dropButton.onmouseover = (e) => {
+let loadFavorite = (e) => {
 	
-// } 
-
-let addToFavorites = (e) => {
-    let dropDownMenu = document.querySelector(".dropdown-content")
-    if (favImages.includes(e)){
-		return;
-    }
-    favImages.push(e);
 	let newDiv = document.createElement("div");
 	let newImg = document.createElement("img");
 	newImg.src = e.imgURL;
+
+    //Fav link
 	let newLink = document.createElement("a");
-    let removeButton = document.createElement("button");
 	newLink.href = "#";
 	newLink.innerHTML = e.id;
-	dropDownMenu.appendChild(newDiv);
+
+    //Remove fav button
+    let removeButton = document.createElement("button");
+    removeButton.onclick = (a) => {
+        favDropDownMenu.removeChild(removeButton.parentElement);
+        favImages = favImages.filter((e) => e.id != newLink.innerHTML);
+        //console.log(favImages);
+        let jsonedList = JSON.stringify(favImages);
+        localStorage.setItem("favImages", jsonedList);
+    }
+
+	favDropDownMenu.appendChild(newDiv);
 	newDiv.appendChild(newImg);
     newDiv.appendChild(removeButton);
 	newDiv.appendChild(newLink);
+}
 
-    removeButton.onclick = (a) => {
-        dropDownMenu.removeChild(removeButton.parentElement);
-        favImages = favImages.filter((e) => e.id != newLink.innerHTML);
-        console.log(favImages);
+let addToFavorites = (e) => {
+	const exists = (element) => element.id === e.id;
+    if (favImages.some(exists)){
+		return;
     }
-
-    console.log(favImages);
+    loadFavorite(e);
+    favImages.push(e);
 
     let jsonedList = JSON.stringify(favImages);
     localStorage.setItem("favImages", jsonedList);
 }
+
+let loadHistory = (e) => {
+	let newDiv = document.createElement("div");
+    //Fav link
+	let newLink = document.createElement("a");
+	newLink.href = "#";
+	newLink.innerHTML = e;
+
+	newDiv.appendChild(newLink);
+	histDropDownMenu.prepend(newDiv);
+}
+
+let addToHistory = (e) => {
+	loadHistory(e);
+	history.push(e);
+
+    let jsonedHistory = JSON.stringify(history);
+    localStorage.setItem("history", jsonedHistory);
+}
+
 // 3
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
@@ -88,16 +130,17 @@ function searchButtonClicked() {
     document.querySelector("#status").innerHTML = "<b>Searching for '" +
         displayTerm + "'<b>";
 
-    console.log(url);
-    history.push(term);
-    console.group(history);
+    //console.log(url);
+    addToHistory(term);
     getData(url);
 }
 
 // 3
 function nextButtonClicked() {
-    console.log("searchButtonClicked() called");
-
+    if (document.querySelector(".result") === null){
+        //console.log("next button clicked, ignore");
+        return;
+    }
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
 
     let GIPHY_KEY = "5PuWjWVnwpHUQPZK866vd7wQ2qeCeqg7"
@@ -105,7 +148,7 @@ function nextButtonClicked() {
     let url = GIPHY_URL;
     url += "api_key=" + GIPHY_KEY;
 
-    let term = document.querySelector("#searchterm").value;
+    let term = history[history.length - 1];
     displayTerm = term;
 
     term = term.trim();
@@ -120,15 +163,16 @@ function nextButtonClicked() {
     url += "&limit=" + limit;
 
     currentPageOffset += parseInt(limit);
-    console.log(currentPageOffset);
+    //console.log(currentPageOffset);
 
     url += `&offset=${currentPageOffset}`
     getData(url);
 }
 
 function backButtonClicked() {
-    console.log("searchButtonClicked() called");
-
+    if (document.querySelector(".result") === null){
+        return;
+    }
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
 
     let GIPHY_KEY = "5PuWjWVnwpHUQPZK866vd7wQ2qeCeqg7"
@@ -136,7 +180,7 @@ function backButtonClicked() {
     let url = GIPHY_URL;
     url += "api_key=" + GIPHY_KEY;
 
-    let term = document.querySelector("#searchterm").value;
+    let term = history[history.length - 1];
     displayTerm = term;
 
     term = term.trim();
@@ -171,7 +215,7 @@ function dataLoaded(e) {
     let xhr = e.target;
 
     document.querySelector("#content").textContent = '';
-    console.log(xhr.responseText);
+    //console.log(xhr.responseText);
 
     let obj = JSON.parse(xhr.responseText);
 
@@ -182,7 +226,7 @@ function dataLoaded(e) {
     }
 
     let results = obj.data;
-    console.log("results.length = " + results.length);
+    //console.log("results.length = " + results.length);
     document.querySelector("#results > p").remove();
     if (document.querySelectorAll("#resultText").length === 0){
         let resultTextDiv = document.createElement("p");

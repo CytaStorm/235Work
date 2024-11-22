@@ -32,7 +32,6 @@ header h1 {
 
 .result {
     position: relative;
-    height: 235px;
     width: 100px;
     float: left;
     border: 1px solid gray;
@@ -149,10 +148,11 @@ button:focus {
 }
 
 /* The container <div> - needed to position the dropdown content */
-.dropdown {
+#hist-dropdown, #fav-dropdown{
     position: relative;
     display: inline-block;
 }
+
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
@@ -181,7 +181,12 @@ button:focus {
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+#hist-dropdown:hover #history-content {
+    display: block;
+}
+
+/* Show the dropdown menu on hover */
+#fav-dropdown:hover #favorites-content {
     display: block;
 }
 
