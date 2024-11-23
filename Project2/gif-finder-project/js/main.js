@@ -2,97 +2,121 @@ let history = [];
 let favImages = [];
 let favDropDownMenu;
 let histDropDownMenu;
+let loader;
 
 let loadFavoriteImages = () => {
     favImages = JSON.parse(localStorage.getItem("favImages"));
-    if (favImages === null){
+    if (favImages === null) {
         favImages = [];
     }
     //console.log("here " + favImages);
     else {
         //console.log(favImages);
         for (const fav of favImages) {
-            loadFavorite({id: fav.id, imgSrcURL: fav.imgSrcURL, imgURL: fav.imgURL});
+            loadFavorite({ id: fav.id, imgSrcURL: fav.imgSrcURL, imgURL: fav.imgURL });
         }
     }
 }
 
 let loadHistoryStartup = () => {
-	history = JSON.parse(localStorage.getItem("history"));
-	if (history === null) {
-		history = [];
-	}
-	else {
-		for (const hist of history){
-			loadHistory(hist);
-		}
-	}
+    history = JSON.parse(localStorage.getItem("history"));
+    if (history === null) {
+        history = [];
+    }
+    else {
+        for (const hist of history) {
+            loadHistory(hist);
+        }
+    }
 }
 // 1
-window.onload = (e) => 
-    {
-        favDropDownMenu = document.querySelector("#favorites-content")
-        histDropDownMenu = document.querySelector("#history-content")
-        document.querySelector("#search").onclick = searchButtonClicked;
-        document.querySelector("#next").onclick = nextButtonClicked;
-        document.querySelector("#back").onclick = backButtonClicked;
-		loadFavoriteImages();
-		loadHistoryStartup();
-     };
+window.onload = (e) => {
+    favDropDownMenu = document.querySelector("#favorites-content")
+    histDropDownMenu = document.querySelector("#history-content")
+    loader = document.querySelector(".loader");
+    loader.style.visibility = "hidden";
+
+    document.querySelector("#search").onclick = searchButtonClicked;
+    document.querySelector("#next").onclick = nextButtonClicked;
+    document.querySelector("#back").onclick = backButtonClicked;
+    loadFavoriteImages();
+    loadHistoryStartup();
+};
 
 // 2
 let displayTerm = "";
 let GIPHY_KEY = "V9rK692HR8uMfjk7g5LLHFFV4Hw70M5i";
 let currentPageOffset = 0;
 
+let removeFromDropDown = (id) => {
+    const children = favDropDownMenu.childNodes
+    for (let i = 1; i < children.length; i++) {
+        const child = children[i];
+        const existingId = child.childNodes[1].childNodes[0].title;
+        if (existingId === id) {
+            favDropDownMenu.removeChild(child);
+            return;
+        }
+    }
+}
+
+let removeFavoriteFromResult = (children, id) => {
+    for (const searchResult of children) {
+        const img =   // span
+            searchResult.childNodes[0].
+                // a
+                childNodes[0].
+                //img
+                childNodes[0];
+        if (img.title == id) {
+            //checkbox
+            searchResult.childNodes[1].checked = false;
+            return;
+        }
+    }
+}
+
+let removeFavorite = (removeImg) => {
+    //find div in fav dropdown that matches Img id
+    removeFromDropDown(removeImg.title);
+    favImages = favImages.filter((e) => e.id != removeImg.title);
+
+    // find existing fav image in search result, uncheck the fav star
+    const children = document.querySelector("#content").childNodes;
+    if (children.length > 1) {
+        removeFavoriteFromResult(children, removeImg.title);
+    }
+    let jsonedList = JSON.stringify(favImages);
+    localStorage.setItem("favImages", jsonedList);
+}
+
 let loadFavorite = (e) => {
-	
-	let newDiv = document.createElement("div");
+
+    let newDiv = document.createElement("div");
 
     //Fav link
-	let newLink = document.createElement("a");
-	newLink.href = e.imgURL;
+    let newLink = document.createElement("a");
+    newLink.href = e.imgURL;
     newLink.target = "_blank";
 
-	let newImg = document.createElement("img");
-	newImg.src = e.imgSrcURL;
+    let newImg = document.createElement("img");
+    newImg.src = e.imgSrcURL;
+    newImg.title = e.id;
 
-    //Remove fav button
     let removeButton = document.createElement("button");
-    removeButton.onclick = (a) => {
-        favDropDownMenu.removeChild(removeButton.parentElement);
-        favImages = favImages.filter((e) => e.id != newLink.innerHTML);
-        //console.log(favImages);
 
-        // find existing fav image in search result, uncheck the fav star
-        const children = document.querySelector("#content").childNodes;
-        for (const searchResult of children){
-            const img =   // span
-                          searchResult.childNodes[0].
-                          // a
-                          childNodes[0].
-                          //img
-                          childNodes[0];
-            if (img.title = e.id) {
-                //checkbox
-                searchResult.childNodes[1].checked = false;
-                break;
-            }
-        }
-        let jsonedList = JSON.stringify(favImages);
-        localStorage.setItem("favImages", jsonedList);
-    }
-
-	favDropDownMenu.appendChild(newDiv);
-	newLink.appendChild(newImg);
     newDiv.appendChild(removeButton);
-	newDiv.appendChild(newLink);
+    favDropDownMenu.appendChild(newDiv);
+    newLink.appendChild(newImg);
+    newDiv.appendChild(newLink);
+
+    removeButton.onclick = () => removeFavorite(newImg);
 }
 
 let addToFavorites = (e) => {
-	const exists = (element) => element.id === e.id;
-    if (favImages.some(exists)){
-		return;
+    const exists = (element) => element.id === e.id;
+    if (favImages.some(exists)) {
+        return;
     }
     loadFavorite(e);
     favImages.push(e);
@@ -102,28 +126,28 @@ let addToFavorites = (e) => {
 }
 
 let loadHistory = (e) => {
-	let newDiv = document.createElement("div");
+    let newDiv = document.createElement("div");
     //Fav link
-	let newLink = document.createElement("a");
-	newLink.href = "#";
-	newLink.innerHTML = e;
+    let newLink = document.createElement("a");
+    newLink.href = "#";
+    newLink.innerHTML = e;
 
-	newDiv.appendChild(newLink);
-	histDropDownMenu.prepend(newDiv);
+    newDiv.appendChild(newLink);
+    histDropDownMenu.prepend(newDiv);
 }
 
 let addToHistory = (e) => {
-	loadHistory(e);
-	history.push(e);
+    loadHistory(e);
+    history.push(e);
 
     let jsonedHistory = JSON.stringify(history);
     localStorage.setItem("history", jsonedHistory);
 }
 
-// 3
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
 
+    loader.style.visibility = "visible";
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
 
     let url = GIPHY_URL;
@@ -154,7 +178,7 @@ function searchButtonClicked() {
 
 // 3
 function nextButtonClicked() {
-    if (document.querySelector(".result") === null){
+    if (document.querySelector(".result") === null) {
         //console.log("next button clicked, ignore");
         return;
     }
@@ -187,7 +211,7 @@ function nextButtonClicked() {
 }
 
 function backButtonClicked() {
-    if (document.querySelector(".result") === null){
+    if (document.querySelector(".result") === null) {
         return;
     }
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
@@ -211,7 +235,7 @@ function backButtonClicked() {
     let limit = document.querySelector("#limit").value;
     url += "&limit=" + limit;
 
-    if (currentPageOffset - parseInt(limit) > 0){
+    if (currentPageOffset - parseInt(limit) > 0) {
         currentPageOffset -= parseInt(limit);
         url += `&offset=${currentPageOffset}`
     }
@@ -231,6 +255,7 @@ function getData(url) {
 function dataLoaded(e) {
     let xhr = e.target;
 
+    loader.style.visibility = "hidden";
     document.querySelector("#content").textContent = '';
     //console.log(xhr.responseText);
 
@@ -245,7 +270,7 @@ function dataLoaded(e) {
     let results = obj.data;
     //console.log("results.length = " + results.length);
     document.querySelector("#results > p").remove();
-    if (document.querySelectorAll("#resultText").length === 0){
+    if (document.querySelectorAll("#resultText").length === 0) {
         let resultTextDiv = document.createElement("p");
         resultTextDiv.id = "resultText";
         resultTextDiv.innerHTML = `<p><i>Here are ${results.length} results for '
@@ -253,8 +278,8 @@ function dataLoaded(e) {
 
         document.querySelector("#results").insertBefore(resultTextDiv, document.querySelector("#content"));
     } else {
-        document.querySelector("resultText").innerHTML = 
-        `<p><i>Here are ${results.length} results for '${displayTerm}'</i>
+        document.querySelector("resultText").innerHTML =
+            `<p><i>Here are ${results.length} results for '${displayTerm}'</i>
         </p>`;
     }
 
@@ -273,7 +298,7 @@ function dataLoaded(e) {
         let newLink = document.createElement("a");
         newLink.target = "_blank";
         newLink.href = url;
-        
+
         let newImg = document.createElement("img");
         newImg.src = smallURL;
         newImg.title = result.id;
@@ -286,19 +311,23 @@ function dataLoaded(e) {
         star.className = "favButton";
         star.type = "checkbox";
         for (const fav of favImages) {
-            if (fav.id == result.id){
+            if (fav.id == result.id) {
                 star.checked = true;
             }
         }
-        star.onclick = () => addToFavorites({id: result.id, imgSrcURL: smallURL, imgURL: url});
+        star.onchange = () => {
+            if (star.checked) {
+                addToFavorites({ id: result.id, imgSrcURL: smallURL, imgURL: url });
+            }
+            else {
+                removeFavorite(star.parentElement.childNodes[0].childNodes[0].childNodes[0]);
+            }
+        }
         newDiv.appendChild(star);
 
         document.querySelector("#content").appendChild(newDiv);
     }
-
-    document.querySelector("#status").innerHTML = "<b>Success!</b>";
 }
-
 
 function dataError(e) {
     console.log("An error occurred");

@@ -20,7 +20,7 @@
 			<input id="searchterm" type="text" size="20" maxlength="20" autofocus value="cats" />
 		</div>
 		<div class="widgets">
-			<button type="button" id="search" class="green">Find some GIFs!<br />:-)</button>
+			<button type="button" id="search" class="blue">Search<br /></button>
 		</div>
 
 		<div class="widgets">
@@ -32,23 +32,23 @@
 				<option value="100">100</option>
 			</select>
 		</div>
-		<div id="hist-dropdown">
-			<button class="widgets">History</button>
-			<div class="dropdown-content" id="history-content">
+		<div id="fun-buttons">
+			<div id="hist-dropdown" class="widgets">
+				<button class="blue">History</button>
+				<div class="dropdown-content" id="history-content">
+				</div>
 			</div>
-		</div>	
-		<div id="fav-dropdown">
-			<button class="widgets">Favorites</button>
-			<div class="dropdown-content" id="favorites-content">
+			<div id="fav-dropdown" class="widgets">
+				<button class="blue" >Favorites</button>
+				<div class="dropdown-content" id="favorites-content">
+				</div>
 			</div>
 		</div>
 		<div id="status">Ready to Search!</div>
 		<hr>
 	</div>
 
-	<div class="spinner">
-		<img src="images/spinner.gif"></img>
-	</div>
+	<div class="loader"></div>
 
 	<div id="results">
 		<h2>Results</h2>
@@ -56,8 +56,8 @@
 		<div id="content">
 		</div>
 		<div class="widgets">
-			<button type="button" id="back" class="green">Back<br /></button>
-			<button type="button" id="next" class="green">Next<br /></button>
+			<button type="button" id="back" class="blue">Back<br /></button>
+			<button type="button" id="next" class="blue">Next<br /></button>
 		</div>
 	</div>
 
