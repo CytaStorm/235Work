@@ -16,6 +16,7 @@ header {
     /* height: 195px; */
     grid-area: title;
     /* margin: 0 10em; */
+    border-radius: 30px;
 }
 
 header h1 {
