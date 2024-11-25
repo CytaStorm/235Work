@@ -52,7 +52,7 @@ let removeFromDropDown = (id) => {
     const children = favDropDownMenu.childNodes
     for (let i = 1; i < children.length; i++) {
         const child = children[i];
-        const existingId = child.childNodes[1].childNodes[0].title;
+        const existingId = child.childNodes[0].childNodes[0].title;
         if (existingId === id) {
             favDropDownMenu.removeChild(child);
             return;
@@ -93,6 +93,7 @@ let removeFavorite = (removeImg) => {
 let loadFavorite = (e) => {
 
     let newDiv = document.createElement("div");
+    newDiv.id = "fav-dropDown";
 
     //Fav link
     let newLink = document.createElement("a");
@@ -104,11 +105,12 @@ let loadFavorite = (e) => {
     newImg.title = e.id;
 
     let removeButton = document.createElement("button");
+    removeButton.className = "removeButton";
 
-    newDiv.appendChild(removeButton);
     favDropDownMenu.appendChild(newDiv);
     newLink.appendChild(newImg);
     newDiv.appendChild(newLink);
+    newDiv.appendChild(removeButton);
 
     removeButton.onclick = () => removeFavorite(newImg);
 }
@@ -167,9 +169,6 @@ function searchButtonClicked() {
     let limit = document.querySelector("#limit").value;
     url += "&limit=" + limit;
     currentPageOffset = 0;
-
-    document.querySelector("#status").innerHTML = "<b>Searching for '" +
-        displayTerm + "'<b>";
 
     //console.log(url);
     addToHistory(term);
@@ -269,22 +268,12 @@ function dataLoaded(e) {
 
     let results = obj.data;
     //console.log("results.length = " + results.length);
-    document.querySelector("#results > p").remove();
-    if (document.querySelectorAll("#resultText").length === 0) {
-        let resultTextDiv = document.createElement("p");
-        resultTextDiv.id = "resultText";
-        resultTextDiv.innerHTML = `<p><i>Here are ${results.length} results for '
-        ${displayTerm}'</i></p>`
-
-        document.querySelector("#results").insertBefore(resultTextDiv, document.querySelector("#content"));
-    } else {
-        document.querySelector("resultText").innerHTML =
-            `<p><i>Here are ${results.length} results for '${displayTerm}'</i>
-        </p>`;
+    if (document.querySelector("#results > p") != null){
+        document.querySelector("#results > p").remove();
     }
 
-    for (let i = 0; i < results.length; i++) {
-        let result = results[i];
+    for (const element of results) {
+        let result = element;
 
         let smallURL = result.images.fixed_width_small.url;
         if (!smallURL) smallURL = "images/no-image-found.png";

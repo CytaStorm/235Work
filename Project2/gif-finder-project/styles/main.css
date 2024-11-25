@@ -9,6 +9,7 @@ body {
         "results results results"
         "result-nav result-nav result-nav";
     grid-template-columns: auto auto min-content;
+    grid-template-rows: min-content auto auto;
 }
 
 header {
@@ -97,7 +98,9 @@ button:focus {
     margin-top: 1em;
     margin-bottom: 1em;
     grid-area: search;
+    /* display: inline-block; */
     display: inline-block;
+    align-self: center;
 }
 
 .widgets:nth-of-type(3) {
@@ -108,6 +111,14 @@ button:focus {
 .search {
     grid-area: search;
     justify-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mainSearch {
+    display: flex;
+    flex-direction: column;
 }
 
 #status {
@@ -191,11 +202,22 @@ button:focus {
     background-color: #3e8e41;
 }
 
-input[type="checkbox"] {
+.removeButton {
     appearance: none;
 }
 
+.removeButton::before{
+    text-shadow: 1px 1px 2px black;
+    content: "X";
+    position: absolute;
+    font-size: 1em;
+    left: 1.8em; 
+    top: 1.5em;
+}
+
 input[type="checkbox"] {
+
+    appearance: none;
     cursor: pointer;
     width: 1em;
     height: 1em;
@@ -242,4 +264,10 @@ input[type="checkbox"]:disabled {
 #fun-buttons {
     display: flex;
     justify-content: space-around;
+}
+
+#fav-dropDown {
+
+    display: flex;
+    flex-direction: column;
 }

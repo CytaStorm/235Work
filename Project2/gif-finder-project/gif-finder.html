@@ -16,11 +16,12 @@
 	</header>
 
 	<div class="search">
+		<div class="mainSearch">	
 		<div class="widgets">
 			<input id="searchterm" type="text" size="20" maxlength="20" autofocus value="cats" />
-		</div>
-		<div class="widgets">
-			<button type="button" id="search" class="blue">Search<br /></button>
+			<div class="widgets">
+				<button type="button" id="search" class="blue">Search<br /></button>
+			</div>
 		</div>
 
 		<div class="widgets">
@@ -32,6 +33,7 @@
 				<option value="100">100</option>
 			</select>
 		</div>
+		</div>
 		<div id="fun-buttons">
 			<div id="hist-dropdown" class="widgets">
 				<button class="blue">History</button>
@@ -39,20 +41,18 @@
 				</div>
 			</div>
 			<div id="fav-dropdown" class="widgets">
-				<button class="blue" >Favorites</button>
+				<button class="blue">Favorites</button>
 				<div class="dropdown-content" id="favorites-content">
 				</div>
 			</div>
 		</div>
-		<div id="status">Ready to Search!</div>
-		<hr>
+		<div class="loader"></div>
 	</div>
 
-	<div class="loader"></div>
 
 	<div id="results">
 		<h2>Results</h2>
-		<p>No data yet!</p>
+		<p>Start searching!</p>
 		<div id="content">
 		</div>
 		<div class="widgets">
