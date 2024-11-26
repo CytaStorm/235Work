@@ -8,7 +8,7 @@ body {
         "title search spinner"
         "results results results"
         "result-nav result-nav result-nav";
-    grid-template-columns: auto auto min-content;
+    grid-template-columns: 50vw auto min-content;
     grid-template-rows: min-content auto auto;
 }
 
@@ -33,6 +33,13 @@ header h1 {
     height: 32px;
 }
 
+#results > p {
+    padding: 1em 0;
+}
+
+#results {
+    padding: 1em;
+}
 .result {
     position: relative;
     height: 200px;
@@ -202,8 +209,14 @@ button:focus {
     background-color: #3e8e41;
 }
 
+p {
+    display: inline;
+}
 .removeButton {
-    appearance: none;
+    background: transparent;
+    color: white;
+    font-weight: 700;
+    
 }
 
 .removeButton::before{
@@ -211,12 +224,16 @@ button:focus {
     content: "X";
     position: absolute;
     font-size: 1em;
-    left: 1.8em; 
-    top: 1.5em;
+    left: 1.5em; 
+    top: 1em;
+    cursor: pointer;
+}
+
+.removeButton::before:hover {
+    color:red;
 }
 
 input[type="checkbox"] {
-
     appearance: none;
     cursor: pointer;
     width: 1em;
@@ -254,6 +271,7 @@ input[type="checkbox"]:disabled {
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
+    align-self: center;
   }
   
   @keyframes spin {

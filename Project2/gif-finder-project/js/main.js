@@ -104,7 +104,7 @@ let loadFavorite = (e) => {
     newImg.src = e.imgSrcURL;
     newImg.title = e.id;
 
-    let removeButton = document.createElement("button");
+    let removeButton = document.createElement("div");
     removeButton.className = "removeButton";
 
     favDropDownMenu.appendChild(newDiv);
