@@ -83,9 +83,7 @@ button {
 }
 
 button.blue {
-    border-color: #0d6cbb;
-    background: #0d6cbb;
-    background: linear-gradient(top,#0d6cbb, 0%, #1e03b9 100%);
+    background-color: #0d6cbb;
 }
 
 button:hover {
@@ -212,11 +210,12 @@ button:focus {
 p {
     display: inline;
 }
+
 .removeButton {
     background: transparent;
-    color: white;
+    color: red;
     font-weight: 700;
-    
+    position: absolute;
 }
 
 .removeButton::before{
@@ -227,10 +226,6 @@ p {
     left: 1.5em; 
     top: 1em;
     cursor: pointer;
-}
-
-.removeButton::before:hover {
-    color:red;
 }
 
 input[type="checkbox"] {

@@ -4,6 +4,7 @@ let favDropDownMenu;
 let histDropDownMenu;
 let loader;
 
+//Used at beginning of site usage
 let loadFavoriteImages = () => {
     favImages = JSON.parse(localStorage.getItem("favImages"));
     if (favImages === null) {
@@ -91,7 +92,7 @@ let removeFavorite = (removeImg) => {
 }
 
 let loadFavorite = (e) => {
-
+    //Add favs to list
     let newDiv = document.createElement("div");
     newDiv.id = "fav-dropDown";
 
@@ -112,10 +113,12 @@ let loadFavorite = (e) => {
     newDiv.appendChild(newLink);
     newDiv.appendChild(removeButton);
 
+    //remove button to dynamically change star highlighted-ness
     removeButton.onclick = () => removeFavorite(newImg);
 }
 
 let addToFavorites = (e) => {
+    //ensure fav img doesn't already exist
     const exists = (element) => element.id === e.id;
     if (favImages.some(exists)) {
         return;
@@ -123,13 +126,14 @@ let addToFavorites = (e) => {
     loadFavorite(e);
     favImages.push(e);
 
+    //store favs
     let jsonedList = JSON.stringify(favImages);
     localStorage.setItem("favImages", jsonedList);
 }
 
 let loadHistory = (e) => {
+    //Load in histories
     let newDiv = document.createElement("div");
-    //Fav link
     let newLink = document.createElement("a");
     newLink.href = "#";
     newLink.innerHTML = e;
@@ -139,9 +143,11 @@ let loadHistory = (e) => {
 }
 
 let addToHistory = (e) => {
+    //load old history to be safe
     loadHistory(e);
     history.push(e);
 
+    //store new history
     let jsonedHistory = JSON.stringify(history);
     localStorage.setItem("history", jsonedHistory);
 }
@@ -296,6 +302,7 @@ function dataLoaded(e) {
         newSpan.appendChild(newLink);
         newDiv.appendChild(newSpan);
 
+        //Favorite star
         let star = document.createElement("input");
         star.className = "favButton";
         star.type = "checkbox";
