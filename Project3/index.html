@@ -2,49 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>PixiJS-1</title>
   <script src="https://pixijs.download/release/pixi.js"></script>
+  <meta charset="utf-8" />
+  <title>pixijs-1</title>
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
   <div id="main">
   </div>
-  <script type="module">
-    const app = new PIXI.Application();
-    const main = document.querySelector("#main");
-    console.log(main.offsetHeight);
-    await app.init(
-      {
-        width: main.offsetWidth, height: main.offsetHeight
-      }
-    );
-
-    // #2 - Append its "view" (a <canvas> tag that it created for us) to the DOM
-    //main.appendChild(app.view);
-
-    // #1 - make a square
-    // https://pixijs.download/release/docs/PIXI.Graphics.html
-    const square = new PIXI.Graphics();
-    square.beginFill(0xFF0000); 	// red in hexadecimal
-    square.lineStyle(3, 0xFFFF00, 1); // lineWidth,color in hex, alpha
-    square.drawRect(0, 0, 40, 40); 	// x,y,width,height
-    square.endFill();
-    square.x = 25;
-    square.y = 50;
-    app.stage.addChild(square);  	// now you can see it
-
-    // #2 make a circle
-    let radius = 20;
-    const circle = new PIXI.Graphics();
-    circle.beginFill(0xFF0000);
-    circle.drawCircle(0, 0, radius);
-    circle.endFill();
-    circle.x = 125;
-    circle.y = 50;
-    app.stage.addChild(circle);
-  </script>
 </body>
 
+<script src="js/pixi.js" type="module"></script>
 </html>
