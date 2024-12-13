@@ -1,16 +1,17 @@
 import { Vector } from './utility.js';
-import { app, gameScene, deltaTime } from './main.js';
+import { app, gameScene, deltaTime} from './main.js';
 "use strict";
 export class WordBlock extends PIXI.Graphics{
     /** 
     * @param {string} text Text to display
     */
-    constructor(text){
+    constructor(text, isLastWord = false){
         super();
         //Fields
         this.x = Math.random() * app.renderer.width;
         this.y = 0;
         this.text = text;
+        this.isLastWord = isLastWord;
 
         //Velocity
         //Go straight down
@@ -20,9 +21,9 @@ export class WordBlock extends PIXI.Graphics{
         let word = new PIXI.Text({
             text: text,
             style: {
-                fontFamily: 'Arial',
-                fontSize: 24,
-                fill: 0xFFFFFF,
+                fontFamily: 'Los Guripas',
+                fontSize: 48,
+                fill: 0xbfac58,
                 align:'center',
             }
         });
@@ -30,13 +31,10 @@ export class WordBlock extends PIXI.Graphics{
 
         //Prevent words from spawning offscreen left-right
         if (this.x + word.width / 2 > app.renderer.width){
-            this.x = app.renderer.width - word.width / 2
+            this.x = app.renderer.width - word.width / 2;
+        } else if (this.x -word.width / 2 < 0) {
+            this.x = app.renderer.width + word.width / 2;
         }
-
-        //Background Rect
-        this.fill(0x292929);
-        this.rect(-word.width / 2, -word.height / 2, word.width, word.height);
-        this.fill();
 
         //Application
         this.addChild(word);
@@ -49,7 +47,6 @@ export class WordBlock extends PIXI.Graphics{
         this.y += this._velocity.y * deltaTime;
         if (this.y > app.renderer.height - this.height){
             gameScene.removeChild(this);
-            delete(this);
         }
     }
 }

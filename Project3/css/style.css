@@ -3,8 +3,15 @@ body {
   margin: 0;
 }
 
+@font-face {
+  font-family: 'Los Guripas';
+  src: url('../fonts/Los\ Guripas.otf');
+}
+
 #main {
-  display: grid; 
+  display: grid;
   justify-content: center;
   align-content: center;
+  font-family: 'Los Guripas';
+  font-size: 0;
 }
