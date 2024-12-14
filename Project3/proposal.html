@@ -32,5 +32,42 @@
   <h2>About Dev</h2>
   <p>Jeff Chen, GDD Major, Sophomore.</p>
 </body>
+<hr>
+<h1>
+  Documentation
+</h1>
+<p>This project was pretty fun to work on, excluding the frustrations
+  with JS as a language, and PIXI's unfamilar style and quirks. </p>
+<p>
+  The whole project was pretty straigthforward. Not many changes from
+  the origin design, except that the shooting was changed to just
+  collision at the recommendation of the instructor.</p>
+<p>
+  I started by building out the main gameplay loop, making sure the
+  words could be spawned correctly, as well as managing the selection
+  of quotes and garbage words. This constituted about half of development,
+  with the other half mainly taken up by figuring out how to touch up
+  the game with graphics and sound.</p>
+<p>
+  I want to highlight the usage of custom fonts in PIXI, which was really
+  annoying to figure out. After a long time spent trying to figure it out
+  on my own, I consulted a <a href="https://youtu.be/aimM6TOzW3s?si=6g0dsXSSSh2wzxim">youtube video</a>
+  on the subject, and it turns out it was a caching issue, which required loading the font
+  by using it in the HTML itself, and hiding it, so that the JS could use it. That was a headache.</p>
+<p>
+  The <a href="https://pixijs.download/dev/docs/index.html">PIXI docs</a> were super helpful, as 
+  documentation tends to be, and using the <a href="https://addons.mozilla.org/en-US/firefox/addon/pixijs-devtools/">
+  PIXI debugger extension for Firefox</a> was helpful as well. It 
+  helped solve a strange alignment issue regarding trimming and whitespace. I appreciated that it 
+  styled itself after Blender, the 3D modelling software.</p>
+
+<p>
+  All requirements are met: I used HTML/CSS/JS + PIXI.JS to build the app. The app is themed
+  to match Darkest Dungeon's theme, and sounds from the game are used as well. HTML and CSS are 
+  validated against the validator, and JS code is documented using JSDOC, and follows coding 
+  conventions.
+</p>
+
+
 
 </html>

@@ -83,11 +83,14 @@ async function Setup() {
     });
     assets = await PIXI.Assets.loadBundle("sprites");
     LoadSounds()
-    
+
     StartGame();
 }
 
-function LoadSounds(){
+/**
+ * Loads sound files
+ */
+function LoadSounds() {
     collectSFX = new Howl({
         src: ["sounds/ui_dun_pit_torch_add.wav"],
     });
@@ -152,6 +155,9 @@ async function StartGame() {
     quoteScreen.visible = false;
 }
 
+/**
+ * Loads main menu and sets it up
+ */
 function LoadMainMenu() {
     let startLabel1 = new PIXI.Text("AncestorBlaster", regStyle);
     startLabel1.anchor.set(0.5, 0.5);
@@ -166,12 +172,18 @@ function LoadMainMenu() {
     startButton.y = app.renderer.height - 100;
     startButton.interactive = true;
     startButton.buttonMode = true;
-    startButton.on("pointerup", LoadFirstLevel);
+    startButton.on("pointerup", (e) => {
+        startButton.interactive = false;
+        LoadFirstLevel();
+    });
     startButton.on("pointerover", (e) => (e.target.alpha = 0.7));
     startButton.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
     mainMenu.addChild(startButton);
 }
 
+/**
+ * Returns to Main Menu
+ */
 function ReturnMainMenu() {
     buttonSFX.play();
     mainMenu.visible = true;
@@ -179,6 +191,9 @@ function ReturnMainMenu() {
     levelEnd.visible = false;
 }
 
+/**
+ * Loads first level, loads list of quotes and sets it
+ */
 async function LoadFirstLevel() {
     buttonSFX.play();
     await SetGarbageWords();
@@ -208,6 +223,12 @@ function gameLoop() {
     }
 }
 
+/**
+ * Spawns text block from the top of the screen at a random
+ * x position.
+ * @param {string} text Text to spawn the block with
+ * @param {boolean} isLastWord Is this the last word in the level?
+ */
 function SpawnTextBlock(text, isLastWord = false) {
     spawnInterval = Math.random() * 2;
     let newBlock;
@@ -251,7 +272,6 @@ function CleanObjects() {
  * @param {number} i Index of word in fallingBlocks array
  */
 function DestroyWord(word, i) {
-    console.log(word);
     gameScene.removeChild(word);
     fallingBlocks.splice(i, 1);
     if (word.isLastWord) {
@@ -260,26 +280,19 @@ function DestroyWord(word, i) {
     }
 }
 
-function ClearScene(scene) {
-    console.log(scene);
-    for (let i of scene.children) {
-        scene.removeChild(i);
-    }
-}
-
 /**
  * Sets up level
  */
 async function NewLevel() {
     GenerateLevelWordPool();
-    ClearScene(quoteScreen);
+    quoteScreen.removeChildren();
+    collectedWords = Array();
     mainMenu.visible = false;
     quoteScreen.visible = true;
     levelEnd.visible = false;
     let quote = new PIXI.Text(CleanQuoteArray(currentQuote), regStyle);
     quote.anchor.set(0.5, 0.5);
     quote.x = app.renderer.width / 2;
-    //console.log(quote.x);
     quote.y = app.renderer.height / 2;
     quoteScreen.addChild(quote);
 
@@ -293,7 +306,7 @@ async function NewLevel() {
     quoteScreen.addChild(beginLevel);
 
     let quoteRef = (CleanQuoteArray(currentQuote));
-    switch (quoteRef){
+    switch (quoteRef) {
         case "Can the defiled be consecrated? Can the fallen find rest?":
             narration1.play();
             break;
@@ -319,14 +332,21 @@ async function NewLevel() {
             narration8.play();
             break;
     }
-    beginLevel.on("pointerup", StartLevel);
+    beginLevel.on("pointerup", () => {
+        beginLevel.interactive = false;
+        StartLevel();
+    });
     beginLevel.on("pointerover", (e) => (e.target.alpha = 0.7));
     beginLevel.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
 }
 
+
+/**
+ * Start Gameplay
+ */
 function StartLevel() {
     buttonSFX.play();
-    ClearScene(gameScene);
+    gameScene.removeChildren();
     mainMenu.visible = false;
     levelEnd.visible = false;
     gameScene.visible = true;
@@ -338,10 +358,13 @@ function StartLevel() {
 
 }
 
+/**
+ * Ends level, goes to and sets up end level screen.
+ */
 function EndLevel() {
-    console.log("endLevel")
     gameScene.visible = false;
     levelEnd.visible = true;
+    levelEnd.removeChildren();
 
     let startLabel1 = new PIXI.Text("Your Quote:", regStyle);
     startLabel1.anchor.set(0.5, 0.5);
@@ -363,7 +386,10 @@ function EndLevel() {
         nextLevel.y = app.renderer.height - 100;
         nextLevel.interactive = true;
         nextLevel.buttonMode = true;
-        nextLevel.on("pointerup", NewLevel);
+        nextLevel.on("pointerup", () => {
+            nextLevel.interactive = false;
+            NewLevel();
+        });
         nextLevel.on("pointerover", (e) => (e.target.alpha = 0.7));
         nextLevel.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
         levelEnd.addChild(nextLevel);
@@ -376,7 +402,10 @@ function EndLevel() {
         returnMainMenu.y = app.renderer.height - 100;
         returnMainMenu.interactive = true;
         returnMainMenu.buttonMode = true;
-        returnMainMenu.on("pointerup", ReturnMainMenu);
+        returnMainMenu.on("pointerup", () => {
+            returnMainMenu.interactive = false;
+            ReturnMainMenu();
+        });
         returnMainMenu.on("pointerover", (e) => (e.target.alpha = 0.7));
         returnMainMenu.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
         levelEnd.addChild(returnMainMenu);
@@ -402,7 +431,6 @@ function GenerateLevelWordPool() {
             levelWordPool.push(wordPoolQuote.shift());
         }
     }
-    console.log(levelWordPool);
 }
 
 /**
@@ -429,7 +457,6 @@ function CleanQuoteArray(inputArray) {
  */
 function GetNewQuote() {
     if (allLines.length == 0) {
-        console.log("no more quotes");
         return;
     }
     return allLines.splice(Math.floor(Math.random() * allLines.length), 1)[0];
